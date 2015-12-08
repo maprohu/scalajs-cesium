@@ -4,10 +4,10 @@ val jsdocgenVersion = "0.1.2-SNAPSHOT"
 
 
 
-//lazy val root = (project in file("."))
-//  .dependsOn(jsdocgenPlugin)
+lazy val root = (project in file("."))
+  .dependsOn(jsdocgenPlugin)
 
-//lazy val jsdocgenPlugin = ProjectRef(uri("../../scalajs-jsdocgen"), "plugin")
+lazy val jsdocgenPlugin = ProjectRef(uri("../../scalajs-jsdocgen"), "plugin")
 
 resolvers ++= Seq(
   Resolver.defaultLocal,
