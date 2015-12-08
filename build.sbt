@@ -100,7 +100,7 @@ lazy val assets = project
     ),
     crossPaths := false,
     resourceGenerators in Compile += Def.task {
-      val f = (resourceManaged in Compile).value / "com" / "github" / "maporhu" / "cesium" / "assets.zip"
+      val f = (resourceManaged in Compile).value / "com" / "github" / "maprohu" / "cesium" / "assets.zip"
       IO.download(url(s"http://cesiumjs.org/releases/Cesium-$cesiumVersion.zip"), f)
       Seq(f)
     }.taskValue,
