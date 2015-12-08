@@ -47,22 +47,24 @@ lazy val facade = project
   .enablePlugins(JsdocPlugin, ScalaJSPlugin)
   .settings(
     publishArtifact in (Compile, packageDoc) := false,
-    name := "scalajs-ol3",
+    name := "scalajs-cesium",
     jsdocRunSource := Some(
       uri(s"https://github.com/AnalyticalGraphicsInc/cesium.git#${cesiumVersion}")
     ),
-    jsdocTarget := (sourceManaged in Compile).value,
     jsdocRunInputs := Seq("Source"),
-    jsdocRunTarget := target.value / "cesium-jsdoc.json",
+    jsdocRunTarget := (resourceDirectory in Compile).value / "cesium-jsdoc.json",
+
+    jsdocTarget := (sourceManaged in Compile).value,
 // comment to do jsdoc run
-    jsdocDocletsFile := target.value / "cesium-jsdoc.json",
-//    jsdocDocletsFile := (sourceDirectory in Compile).value / "jsdoc" / s"ol3-${cesiumVersion}-jsdoc.json",
+    jsdocDocletsFile := (resourceDirectory in Compile).value / "cesium-jsdoc.json",
     jsdocGlobalScope := Seq("cesium"),
     jsdocUtilScope := "pkg",
+
     sourceGenerators in Compile += jsdocGenerate.taskValue,
-    jsDependencies ++= Seq(
-      "org.webjars.bower" % "cesium" % cesiumVersion / s"webjars/cesiumjs/${cesiumVersion}.0/CesiumUnminified/Cesium.js" minified s"webjars/cesiumjs/${cesiumVersion}.0/CesiumUnminified/Cesium.js"
-    ),
+    jsdocSourcePublishRoot := uri(s"https://github.com/AnalyticalGraphicsInc/cesium/blob/$cesiumVersion/"),
+//    jsDependencies ++= Seq(
+//      "org.webjars.bower" % "cesium" % cesiumVersion / s"webjars/cesiumjs/${cesiumVersion}.0/CesiumUnminified/Cesium.js" minified s"webjars/cesiumjs/${cesiumVersion}.0/CesiumUnminified/Cesium.js"
+//    ),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.8.0"
     ),
